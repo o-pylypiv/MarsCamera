@@ -9,21 +9,79 @@
 /* Begin PBXBuildFile section */
 		EB9DBA792C650102005A0BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA782C650102005A0BEA /* AppDelegate.swift */; };
 		EB9DBA7B2C650102005A0BEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA7A2C650102005A0BEA /* SceneDelegate.swift */; };
-		EB9DBA7D2C650102005A0BEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA7C2C650102005A0BEA /* ViewController.swift */; };
 		EB9DBA802C650102005A0BEA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EB9DBA7F2C650102005A0BEA /* Base */; };
 		EB9DBA822C650106005A0BEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB9DBA812C650106005A0BEA /* Assets.xcassets */; };
 		EB9DBA852C650106005A0BEA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EB9DBA842C650106005A0BEA /* Base */; };
+		EB9DBA8E2C651D69005A0BEA /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA8D2C651D69005A0BEA /* PhotoResponse.swift */; };
+		EB9DBA902C651DDD005A0BEA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA8F2C651DDD005A0BEA /* Camera.swift */; };
+		EB9DBA922C651DF1005A0BEA /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA912C651DF1005A0BEA /* Rover.swift */; };
+		EB9DBA942C651E0B005A0BEA /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA932C651E0B005A0BEA /* Photo.swift */; };
+		EB9DBA962C651E63005A0BEA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA952C651E63005A0BEA /* NetworkManager.swift */; };
+		EB9DBA982C652148005A0BEA /* MCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA972C652148005A0BEA /* MCError.swift */; };
+		EB9DBA9C2C6527CC005A0BEA /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA9B2C6527CC005A0BEA /* PhotosViewModel.swift */; };
+		EB9DBAA02C6624CD005A0BEA /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA9F2C6624CD005A0BEA /* PhotoCell.swift */; };
+		EB9DBAA22C662CD9005A0BEA /* MCPhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAA12C662CD9005A0BEA /* MCPhotoImageView.swift */; };
+		EB9DBAA82C662FED005A0BEA /* MCLabelWithAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAA72C662FED005A0BEA /* MCLabelWithAttributes.swift */; };
+		EB9DBAAA2C675801005A0BEA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAA92C675800005A0BEA /* UIHelper.swift */; };
+		EB9DBAAC2C675865005A0BEA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAAB2C675865005A0BEA /* Constants.swift */; };
+		EB9DBAAE2C68D33B005A0BEA /* CameraInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAAD2C68D33B005A0BEA /* CameraInfo.swift */; };
+		EB9DBAB02C690F69005A0BEA /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAAF2C690F69005A0BEA /* HeaderView.swift */; };
+		EB9DBAB22C69F3CA005A0BEA /* MCIconTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAB12C69F3CA005A0BEA /* MCIconTextButton.swift */; };
+		EB9DBAB62C6A0155005A0BEA /* MCDataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAB52C6A0155005A0BEA /* MCDataLoadingVC.swift */; };
+		EB9DBABA2C6A0217005A0BEA /* MCEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAB92C6A0217005A0BEA /* MCEmptyStateView.swift */; };
+		EB9DBAC52C6A0AED005A0BEA /* MCDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAC42C6A0AED005A0BEA /* MCDatePickerView.swift */; };
+		EB9DBAC72C6A497C005A0BEA /* PhotoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAC62C6A497C005A0BEA /* PhotoDetailViewModel.swift */; };
+		EB9DBAC92C6A4A5F005A0BEA /* PhotoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAC82C6A4A5F005A0BEA /* PhotoDetailVC.swift */; };
+		EB9DBACB2C6A4AD3005A0BEA /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBACA2C6A4AD3005A0BEA /* HomeVC.swift */; };
+		EB9DBACD2C6A5C93005A0BEA /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBACC2C6A5C93005A0BEA /* Date+Ext.swift */; };
+		EB9DBACF2C6A5D8B005A0BEA /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBACE2C6A5D8B005A0BEA /* String+Ext.swift */; };
+		EB9DBAD12C6A62FC005A0BEA /* RoverPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAD02C6A62FC005A0BEA /* RoverPickerVC.swift */; };
+		EB9DBAD32C6BA9BE005A0BEA /* CameraPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAD22C6BA9BE005A0BEA /* CameraPickerVC.swift */; };
+		EB9DBAD52C6BAA1A005A0BEA /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAD42C6BAA1A005A0BEA /* UIViewController+Ext.swift */; };
+		EB9DBAD72C6BAB2B005A0BEA /* CameraPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAD62C6BAB2B005A0BEA /* CameraPickerViewModel.swift */; };
+		EB9DBAD92C6CC6A8005A0BEA /* RoverData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAD82C6CC6A8005A0BEA /* RoverData.swift */; };
+		EB9DBADB2C6CF55E005A0BEA /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBADA2C6CF55E005A0BEA /* HistoryVC.swift */; };
+		EB9DBADF2C6D03AA005A0BEA /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBADE2C6D03AA005A0BEA /* HistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EB9DBA752C650102005A0BEA /* MarsCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarsCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB9DBA782C650102005A0BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB9DBA7A2C650102005A0BEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EB9DBA7C2C650102005A0BEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EB9DBA7F2C650102005A0BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB9DBA812C650106005A0BEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB9DBA842C650106005A0BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB9DBA862C650106005A0BEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB9DBA8D2C651D69005A0BEA /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
+		EB9DBA8F2C651DDD005A0BEA /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		EB9DBA912C651DF1005A0BEA /* Rover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
+		EB9DBA932C651E0B005A0BEA /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		EB9DBA952C651E63005A0BEA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EB9DBA972C652148005A0BEA /* MCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCError.swift; sourceTree = "<group>"; };
+		EB9DBA9B2C6527CC005A0BEA /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
+		EB9DBA9F2C6624CD005A0BEA /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		EB9DBAA12C662CD9005A0BEA /* MCPhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPhotoImageView.swift; sourceTree = "<group>"; };
+		EB9DBAA72C662FED005A0BEA /* MCLabelWithAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLabelWithAttributes.swift; sourceTree = "<group>"; };
+		EB9DBAA92C675800005A0BEA /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		EB9DBAAB2C675865005A0BEA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EB9DBAAD2C68D33B005A0BEA /* CameraInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraInfo.swift; sourceTree = "<group>"; };
+		EB9DBAAF2C690F69005A0BEA /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		EB9DBAB12C69F3CA005A0BEA /* MCIconTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCIconTextButton.swift; sourceTree = "<group>"; };
+		EB9DBAB52C6A0155005A0BEA /* MCDataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCDataLoadingVC.swift; sourceTree = "<group>"; };
+		EB9DBAB92C6A0217005A0BEA /* MCEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCEmptyStateView.swift; sourceTree = "<group>"; };
+		EB9DBAC42C6A0AED005A0BEA /* MCDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCDatePickerView.swift; sourceTree = "<group>"; };
+		EB9DBAC62C6A497C005A0BEA /* PhotoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailViewModel.swift; sourceTree = "<group>"; };
+		EB9DBAC82C6A4A5F005A0BEA /* PhotoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailVC.swift; sourceTree = "<group>"; };
+		EB9DBACA2C6A4AD3005A0BEA /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		EB9DBACC2C6A5C93005A0BEA /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		EB9DBACE2C6A5D8B005A0BEA /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		EB9DBAD02C6A62FC005A0BEA /* RoverPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPickerVC.swift; sourceTree = "<group>"; };
+		EB9DBAD22C6BA9BE005A0BEA /* CameraPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerVC.swift; sourceTree = "<group>"; };
+		EB9DBAD42C6BAA1A005A0BEA /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		EB9DBAD62C6BAB2B005A0BEA /* CameraPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerViewModel.swift; sourceTree = "<group>"; };
+		EB9DBAD82C6CC6A8005A0BEA /* RoverData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverData.swift; sourceTree = "<group>"; };
+		EB9DBADA2C6CF55E005A0BEA /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		EB9DBADE2C6D03AA005A0BEA /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +114,140 @@
 		EB9DBA772C650102005A0BEA /* MarsCamera */ = {
 			isa = PBXGroup;
 			children = (
-				EB9DBA782C650102005A0BEA /* AppDelegate.swift */,
+				EB9DBA9D2C6604A1005A0BEA /* ViewModel */,
+				EB9DBA8C2C651CDD005A0BEA /* Model */,
+				EB9DBA9E2C6604C0005A0BEA /* Network */,
+				EB9DBAA42C662F79005A0BEA /* Utilities */,
+				EB9DBAA32C662F4E005A0BEA /* View */,
+				EB9DBACA2C6A4AD3005A0BEA /* HomeVC.swift */,
+				EB9DBADA2C6CF55E005A0BEA /* HistoryVC.swift */,
+				EB9DBAC82C6A4A5F005A0BEA /* PhotoDetailVC.swift */,
 				EB9DBA7A2C650102005A0BEA /* SceneDelegate.swift */,
-				EB9DBA7C2C650102005A0BEA /* ViewController.swift */,
+				EB9DBA782C650102005A0BEA /* AppDelegate.swift */,
 				EB9DBA7E2C650102005A0BEA /* Main.storyboard */,
 				EB9DBA812C650106005A0BEA /* Assets.xcassets */,
 				EB9DBA832C650106005A0BEA /* LaunchScreen.storyboard */,
 				EB9DBA862C650106005A0BEA /* Info.plist */,
 			);
 			path = MarsCamera;
+			sourceTree = "<group>";
+		};
+		EB9DBA8C2C651CDD005A0BEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBA8D2C651D69005A0BEA /* PhotoResponse.swift */,
+				EB9DBA8F2C651DDD005A0BEA /* Camera.swift */,
+				EB9DBAAD2C68D33B005A0BEA /* CameraInfo.swift */,
+				EB9DBA912C651DF1005A0BEA /* Rover.swift */,
+				EB9DBAD82C6CC6A8005A0BEA /* RoverData.swift */,
+				EB9DBA932C651E0B005A0BEA /* Photo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EB9DBA9D2C6604A1005A0BEA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBA9B2C6527CC005A0BEA /* PhotosViewModel.swift */,
+				EB9DBAC62C6A497C005A0BEA /* PhotoDetailViewModel.swift */,
+				EB9DBAD62C6BAB2B005A0BEA /* CameraPickerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EB9DBA9E2C6604C0005A0BEA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBA952C651E63005A0BEA /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		EB9DBAA32C662F4E005A0BEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBABD2C6A0A3F005A0BEA /* ImageView */,
+				EB9DBABE2C6A0A4B005A0BEA /* Label */,
+				EB9DBADD2C6D0366005A0BEA /* TableViewCell */,
+				EB9DBABF2C6A0A5A005A0BEA /* CollectionViewCell */,
+				EB9DBAC02C6A0A6D005A0BEA /* UIView */,
+				EB9DBAC12C6A0A83005A0BEA /* Button */,
+				EB9DBAC32C6A0AA1005A0BEA /* ViewController */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EB9DBAA42C662F79005A0BEA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBA972C652148005A0BEA /* MCError.swift */,
+				EB9DBAAB2C675865005A0BEA /* Constants.swift */,
+				EB9DBAA92C675800005A0BEA /* UIHelper.swift */,
+				EB9DBACC2C6A5C93005A0BEA /* Date+Ext.swift */,
+				EB9DBAD42C6BAA1A005A0BEA /* UIViewController+Ext.swift */,
+				EB9DBACE2C6A5D8B005A0BEA /* String+Ext.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EB9DBABD2C6A0A3F005A0BEA /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBAA12C662CD9005A0BEA /* MCPhotoImageView.swift */,
+			);
+			path = ImageView;
+			sourceTree = "<group>";
+		};
+		EB9DBABE2C6A0A4B005A0BEA /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBAA72C662FED005A0BEA /* MCLabelWithAttributes.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		EB9DBABF2C6A0A5A005A0BEA /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBA9F2C6624CD005A0BEA /* PhotoCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		EB9DBAC02C6A0A6D005A0BEA /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBAAF2C690F69005A0BEA /* HeaderView.swift */,
+				EB9DBAB92C6A0217005A0BEA /* MCEmptyStateView.swift */,
+				EB9DBAC42C6A0AED005A0BEA /* MCDatePickerView.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		EB9DBAC12C6A0A83005A0BEA /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBAB12C69F3CA005A0BEA /* MCIconTextButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		EB9DBAC32C6A0AA1005A0BEA /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBAB52C6A0155005A0BEA /* MCDataLoadingVC.swift */,
+				EB9DBAD02C6A62FC005A0BEA /* RoverPickerVC.swift */,
+				EB9DBAD22C6BA9BE005A0BEA /* CameraPickerVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		EB9DBADD2C6D0366005A0BEA /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBADE2C6D03AA005A0BEA /* HistoryCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +321,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB9DBA7D2C650102005A0BEA /* ViewController.swift in Sources */,
+				EB9DBAD32C6BA9BE005A0BEA /* CameraPickerVC.swift in Sources */,
+				EB9DBADB2C6CF55E005A0BEA /* HistoryVC.swift in Sources */,
+				EB9DBAC92C6A4A5F005A0BEA /* PhotoDetailVC.swift in Sources */,
+				EB9DBAD52C6BAA1A005A0BEA /* UIViewController+Ext.swift in Sources */,
+				EB9DBABA2C6A0217005A0BEA /* MCEmptyStateView.swift in Sources */,
+				EB9DBAAE2C68D33B005A0BEA /* CameraInfo.swift in Sources */,
+				EB9DBAD72C6BAB2B005A0BEA /* CameraPickerViewModel.swift in Sources */,
+				EB9DBAD92C6CC6A8005A0BEA /* RoverData.swift in Sources */,
+				EB9DBACD2C6A5C93005A0BEA /* Date+Ext.swift in Sources */,
+				EB9DBA942C651E0B005A0BEA /* Photo.swift in Sources */,
+				EB9DBA9C2C6527CC005A0BEA /* PhotosViewModel.swift in Sources */,
+				EB9DBAA02C6624CD005A0BEA /* PhotoCell.swift in Sources */,
+				EB9DBAB62C6A0155005A0BEA /* MCDataLoadingVC.swift in Sources */,
+				EB9DBAB22C69F3CA005A0BEA /* MCIconTextButton.swift in Sources */,
+				EB9DBACB2C6A4AD3005A0BEA /* HomeVC.swift in Sources */,
+				EB9DBA902C651DDD005A0BEA /* Camera.swift in Sources */,
+				EB9DBAB02C690F69005A0BEA /* HeaderView.swift in Sources */,
+				EB9DBAAC2C675865005A0BEA /* Constants.swift in Sources */,
+				EB9DBA922C651DF1005A0BEA /* Rover.swift in Sources */,
+				EB9DBAA82C662FED005A0BEA /* MCLabelWithAttributes.swift in Sources */,
+				EB9DBA962C651E63005A0BEA /* NetworkManager.swift in Sources */,
 				EB9DBA792C650102005A0BEA /* AppDelegate.swift in Sources */,
 				EB9DBA7B2C650102005A0BEA /* SceneDelegate.swift in Sources */,
+				EB9DBACF2C6A5D8B005A0BEA /* String+Ext.swift in Sources */,
+				EB9DBAC52C6A0AED005A0BEA /* MCDatePickerView.swift in Sources */,
+				EB9DBA982C652148005A0BEA /* MCError.swift in Sources */,
+				EB9DBAD12C6A62FC005A0BEA /* RoverPickerVC.swift in Sources */,
+				EB9DBAC72C6A497C005A0BEA /* PhotoDetailViewModel.swift in Sources */,
+				EB9DBA8E2C651D69005A0BEA /* PhotoResponse.swift in Sources */,
+				EB9DBAA22C662CD9005A0BEA /* MCPhotoImageView.swift in Sources */,
+				EB9DBADF2C6D03AA005A0BEA /* HistoryCell.swift in Sources */,
+				EB9DBAAA2C675801005A0BEA /* UIHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +510,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +520,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.MarsCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -326,8 +543,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +553,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.MarsCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
