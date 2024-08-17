@@ -12,7 +12,7 @@ class CameraPickerVC: UIViewController {
     var viewModel = CameraPickerViewModel()
     var onCameraSelected: ((String) -> Void)?
     
-    private let pickerView = UIPickerView()
+    var pickerView: UIPickerView!
     private let confirmButton = UIButton()
     private let cancelButton = UIButton()
     private let titleLabel = UILabel()
@@ -22,8 +22,6 @@ class CameraPickerVC: UIViewController {
         super.viewDidLoad()
         setupBackgroundView()
         setupPickerCardView()
-        bindViewModel()
-        viewModel.fetchCameras()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +41,7 @@ class CameraPickerVC: UIViewController {
         pickerCardView.layer.shadowOffset = CGSize(width: 0, height: 2)
         pickerCardView.layer.shadowRadius = 4
 
+        pickerView = UIPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
 
@@ -93,18 +92,6 @@ class CameraPickerVC: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
         view.addGestureRecognizer(tapGesture)
-    }
-    
-    private func bindViewModel() {
-        viewModel.didUpdateCameras = { [weak self] in
-            DispatchQueue.main.async {
-                self?.pickerView.reloadAllComponents()
-            }
-        }
-    }
-    
-    func getRoversWithCamera(_ camera: String) -> [String] {
-        return RoverData.roverCameras.filter { $0.value.contains { $0.name == camera } }.map { $0.key }
     }
     
     @objc private func confirmButtonTapped() {

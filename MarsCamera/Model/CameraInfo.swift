@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CameraInfo: Codable {
+struct CameraInfo: Codable, Hashable {
     let name: String
     let fullName: String
 }

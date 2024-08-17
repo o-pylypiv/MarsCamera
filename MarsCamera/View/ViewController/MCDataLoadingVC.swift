@@ -42,10 +42,11 @@ class MCDataLoadingVC: UIViewController {
     }
     
     func showEmptyStateView(with message: String, in view: UIView) {
-        dismissEmptyStateView() // Ensure previous empty state view is dismissed
+        dismissEmptyStateView()
         emptyStateView = MCEmptyStateView(message: message)
-        emptyStateView?.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emptyStateView!)
+        
+        emptyStateView?.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             emptyStateView!.centerXAnchor.constraint(equalTo: view.centerXAnchor),

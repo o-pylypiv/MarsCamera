@@ -29,8 +29,10 @@ class MCEmptyStateView: UIView {
     private func configure() {
         addSubview(placeholderImageView)
         addSubview(messageLabel)
+        
         configureLogoImageView()
         configureMessageLabel()
+        backgroundColor = .white
     }
     
     private func configureLogoImageView() {
@@ -40,8 +42,8 @@ class MCEmptyStateView: UIView {
         NSLayoutConstraint.activate([
             placeholderImageView.widthAnchor.constraint(equalToConstant: 145),
             placeholderImageView.heightAnchor.constraint(equalToConstant: 145),
-            placeholderImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            placeholderImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            placeholderImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            placeholderImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -40)
         ])
     }
     

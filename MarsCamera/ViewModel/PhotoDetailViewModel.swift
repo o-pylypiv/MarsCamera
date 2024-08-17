@@ -8,6 +8,7 @@
 import Foundation
 
 class PhotoDetailViewModel {
+    
     let photo: Photo
     
     init(photo: Photo) {

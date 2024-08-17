@@ -86,6 +86,11 @@ class MCDatePickerView: UIView {
         ])
     }
     
+    func setDateRange(minDate: Date, maxDate: Date) {
+        datePicker.minimumDate = minDate
+        datePicker.maximumDate = maxDate
+    }
+    
     func setDate(_ date: String) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

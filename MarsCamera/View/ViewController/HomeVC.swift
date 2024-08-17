@@ -10,12 +10,12 @@ import UIKit
 class HomeVC: MCDataLoadingVC {
     
     var collectionView: UICollectionView!
-    
     private var viewModel = PhotosViewModel()
     private var headerView = HeaderView()
-    var selectedDateString: String!
-    
     private let historyButton = MCIconTextButton(icon: UIImage(resource: .historyIcon), title: nil)
+    
+    private var minDate: Date?
+    private var maxDate: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +29,12 @@ class HomeVC: MCDataLoadingVC {
         headerView.onSaveButtonTapped = { [weak self] in self?.presentSaveFiltersAlert() }
         
         bindViewModel()
-        getPhotos()
-        print(headerView.roverFilterButton.getTitle()!)
+        viewModel.fetchRoverData()
     }
     
     private func setupHeaderView() {
         navigationController?.navigationBar.isHidden = true
         view.addSubview(headerView)
-        headerView.setDate(Date().convertToMonthDayYearFormat())
-        selectedDateString = Date().convertToAPIFormat()
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -75,7 +72,6 @@ class HomeVC: MCDataLoadingVC {
         historyButton.setSize(width: 70, height: 70, iconSize: 44)
         historyButton.layer.cornerRadius = 35
         historyButton.backgroundColor = UIColor(red: 255/255, green: 105/255, blue: 44/255, alpha: 1)
-        
         view.addSubview(historyButton)
         
         historyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -102,12 +98,11 @@ class HomeVC: MCDataLoadingVC {
                 self.dismissEmptyStateView()
                 
                 if self.viewModel.photos.isEmpty {
-                    self.collectionView.reloadData()
-                    self.showEmptyStateView(with: "No photos available.\n Try another date, rover or camera :)", in: self.view)
+                    self.showEmptyStateView(with: "No photos available.\nTry another date :)", in: self.collectionView)
                 } else {
+                    self.dismissEmptyStateView()
                     self.collectionView.reloadData()
                     self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-                    self.dismissEmptyStateView()
                 }
             }
         }
@@ -119,64 +114,35 @@ class HomeVC: MCDataLoadingVC {
                 self.dismissEmptyStateView()
                 self.collectionView.reloadData()
                 self.presentErrorOnMainThread(message: errorMessage)
-                self.showEmptyStateView(with: "No photos available.\n Try another date, rover or camera :)", in: self.view)
-            }
-        }
-    }
-    
-    func getPhotos() {
-        showLoadingView()
-        
-        let rover = headerView.roverFilterButton.getTitle()
-        var camera: String? = headerView.cameraFilterButton.getTitle()
-        let date = selectedDateString
-        
-        if camera == "All" { camera = nil }
-        if rover == "All" {
-            fetchAllRoversPhotos(camera: camera, date: date)
-        } else {
-            viewModel.fetchPhotos(rover: rover, camera: camera, date: date)
-        }
-    }
-    
-    private func fetchAllRoversPhotos(camera: String?, date: String?) {
-        let rovers = [RoverNames.curiosity, RoverNames.opportunity, RoverNames.spirit]
-        var allPhotos: [Photo] = []
-        let group = DispatchGroup()
-        var hasErrorOccurred = false
-        
-        rovers.forEach { rover in
-            group.enter()
-            viewModel.fetchPhotos(rover: rover, camera: camera, date: date) { [weak self] result in
-                defer { group.leave() }
-                
-                switch result {
-                case .success(let photos):
-                    allPhotos.append(contentsOf: photos)
-                case .failure(let error):
-                    hasErrorOccurred = true
-                    self?.viewModel.didEncounterError?(error.rawValue)
-                }
             }
         }
         
-        group.notify(queue: .main) { [weak self] in
-            if hasErrorOccurred {
-                print("An error occurred while fetching photos.")
-                self?.presentErrorOnMainThread(message: "Failed to load photos. Please try again later.")
+        viewModel.didSetDateRange = { [weak self] minDate, maxDate in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.minDate = minDate
+                self.maxDate = maxDate
+                self.headerView.setDate(self.viewModel.selectedDateString.convertToDisplayFormat())
             }
-            
-            self?.viewModel.photos = allPhotos
-            if allPhotos.isEmpty {
-                print("No photos available for the selected criteria.")
-                self?.viewModel.didUpdatePhotos?()
-            } else {
-                self?.viewModel.didUpdatePhotos?()
-            }
+        }
+        
+        viewModel.didStartLoading = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.showLoadingView() }
+        }
+        
+        viewModel.didEndLoading = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.dismissLoadingView() }
         }
     }
     
     private func presentDatePicker() {
+        guard let minDate = minDate, let maxDate = maxDate else {
+            presentErrorOnMainThread(message: "Date range not set.")
+            return
+        }
+        
         let dimmingView = UIView(frame: view.bounds)
         dimmingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         dimmingView.alpha = 0
@@ -184,13 +150,18 @@ class HomeVC: MCDataLoadingVC {
         
         let datePickerView = MCDatePickerView()
         datePickerView.layer.cornerRadius = 50
-        datePickerView.setDate(selectedDateString)
+        datePickerView.setDateRange(minDate: minDate, maxDate: maxDate)
+        datePickerView.setDate(viewModel.selectedDateString)
         datePickerView.dateSelected = { [weak self] selectedDate in
-            self?.headerView.setDate(selectedDate.convertToDisplayFormat())
-            print("Selected date: \(selectedDate)")
-            self?.selectedDateString = selectedDate
-            self?.getPhotos()
-            self?.dismissDatePicker()
+            guard let self else {return}
+            self.headerView.setDate(selectedDate.convertToDisplayFormat())
+            self.viewModel.selectedDateString = selectedDate
+            self.viewModel.selectedRover = "All"
+            self.viewModel.selectedCamera = "All"
+            self.headerView.roverFilterButton.changeTitle(newTitle: "All")
+            self.headerView.cameraFilterButton.changeTitle(newTitle: "All")
+            self.viewModel.getPhotos()
+            self.dismissDatePicker()
         }
         datePickerView.cancelTapped = { [weak self] in
             self?.dismissDatePicker()
@@ -229,14 +200,17 @@ class HomeVC: MCDataLoadingVC {
     
     private func presentRoverPicker() {
         let roverPickerVC = RoverPickerVC()
-        roverPickerVC.rovers = ["All", "Curiosity", "Opportunity", "Spirit"]
-        roverPickerVC.selectedRover = headerView.roverFilterButton.title(for: .normal)
+        roverPickerVC.viewModel.rovers = ["All"] + viewModel.validRovers 
+        roverPickerVC.viewModel.selectedRover = headerView.roverFilterButton.title(for: .normal)
         
         roverPickerVC.onRoverSelected = { [weak self] selectedRover in
             print("Rover selected from picker: \(selectedRover)")
             self?.headerView.roverFilterButton.changeTitle(newTitle: selectedRover)
-            self?.getPhotos()
+            self?.viewModel.updateFilters(rover: selectedRover, camera: "All")
+            self?.headerView.cameraFilterButton.changeTitle(newTitle: "All")
+            self?.viewModel.getPhotos()
         }
+        
         roverPickerVC.modalPresentationStyle = .overCurrentContext
         roverPickerVC.modalTransitionStyle = .crossDissolve
         present(roverPickerVC, animated: true)
@@ -244,15 +218,14 @@ class HomeVC: MCDataLoadingVC {
 
     private func presentCameraPicker() {
         let cameraPickerVC = CameraPickerVC()
-        let cameraPickerViewModel = CameraPickerViewModel()
-        
-        cameraPickerViewModel.selectedRover = headerView.roverFilterButton.getTitle()
-        cameraPickerVC.viewModel = cameraPickerViewModel
+        cameraPickerVC.viewModel.cameras = viewModel.validCameras
+        cameraPickerVC.viewModel.cameras.insert(CameraInfo(name: "All", fullName: "All") , at: 0)
+        cameraPickerVC.viewModel.selectedRover = headerView.roverFilterButton.getTitle()
         
         cameraPickerVC.onCameraSelected = { [weak self] selectedCamera in
-            guard let self else {return}
-            self.headerView.cameraFilterButton.changeTitle(newTitle: selectedCamera)
-            self.getPhotos()
+            self?.headerView.cameraFilterButton.changeTitle(newTitle: selectedCamera)
+            self?.viewModel.updateFilters(rover: self?.viewModel.selectedRover, camera: selectedCamera)
+            self?.viewModel.getPhotos()
         }
         
         cameraPickerVC.modalPresentationStyle = .overCurrentContext

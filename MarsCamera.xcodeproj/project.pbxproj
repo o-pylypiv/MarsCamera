@@ -22,7 +22,6 @@
 		EB9DBAA02C6624CD005A0BEA /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA9F2C6624CD005A0BEA /* PhotoCell.swift */; };
 		EB9DBAA22C662CD9005A0BEA /* MCPhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAA12C662CD9005A0BEA /* MCPhotoImageView.swift */; };
 		EB9DBAA82C662FED005A0BEA /* MCLabelWithAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAA72C662FED005A0BEA /* MCLabelWithAttributes.swift */; };
-		EB9DBAAA2C675801005A0BEA /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAA92C675800005A0BEA /* UIHelper.swift */; };
 		EB9DBAAC2C675865005A0BEA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAAB2C675865005A0BEA /* Constants.swift */; };
 		EB9DBAAE2C68D33B005A0BEA /* CameraInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAAD2C68D33B005A0BEA /* CameraInfo.swift */; };
 		EB9DBAB02C690F69005A0BEA /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAAF2C690F69005A0BEA /* HeaderView.swift */; };
@@ -42,6 +41,8 @@
 		EB9DBAD92C6CC6A8005A0BEA /* RoverData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAD82C6CC6A8005A0BEA /* RoverData.swift */; };
 		EB9DBADB2C6CF55E005A0BEA /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBADA2C6CF55E005A0BEA /* HistoryVC.swift */; };
 		EB9DBADF2C6D03AA005A0BEA /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBADE2C6D03AA005A0BEA /* HistoryCell.swift */; };
+		EB9DBAE12C6E359D005A0BEA /* RoverDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAE02C6E359D005A0BEA /* RoverDataManager.swift */; };
+		EB9DBAE32C708D98005A0BEA /* RoverPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBAE22C708D98005A0BEA /* RoverPickerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +63,6 @@
 		EB9DBA9F2C6624CD005A0BEA /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		EB9DBAA12C662CD9005A0BEA /* MCPhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPhotoImageView.swift; sourceTree = "<group>"; };
 		EB9DBAA72C662FED005A0BEA /* MCLabelWithAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCLabelWithAttributes.swift; sourceTree = "<group>"; };
-		EB9DBAA92C675800005A0BEA /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		EB9DBAAB2C675865005A0BEA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EB9DBAAD2C68D33B005A0BEA /* CameraInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraInfo.swift; sourceTree = "<group>"; };
 		EB9DBAAF2C690F69005A0BEA /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -82,6 +82,8 @@
 		EB9DBAD82C6CC6A8005A0BEA /* RoverData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverData.swift; sourceTree = "<group>"; };
 		EB9DBADA2C6CF55E005A0BEA /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		EB9DBADE2C6D03AA005A0BEA /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		EB9DBAE02C6E359D005A0BEA /* RoverDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverDataManager.swift; sourceTree = "<group>"; };
+		EB9DBAE22C708D98005A0BEA /* RoverPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPickerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,9 +121,6 @@
 				EB9DBA9E2C6604C0005A0BEA /* Network */,
 				EB9DBAA42C662F79005A0BEA /* Utilities */,
 				EB9DBAA32C662F4E005A0BEA /* View */,
-				EB9DBACA2C6A4AD3005A0BEA /* HomeVC.swift */,
-				EB9DBADA2C6CF55E005A0BEA /* HistoryVC.swift */,
-				EB9DBAC82C6A4A5F005A0BEA /* PhotoDetailVC.swift */,
 				EB9DBA7A2C650102005A0BEA /* SceneDelegate.swift */,
 				EB9DBA782C650102005A0BEA /* AppDelegate.swift */,
 				EB9DBA7E2C650102005A0BEA /* Main.storyboard */,
@@ -151,6 +150,7 @@
 				EB9DBA9B2C6527CC005A0BEA /* PhotosViewModel.swift */,
 				EB9DBAC62C6A497C005A0BEA /* PhotoDetailViewModel.swift */,
 				EB9DBAD62C6BAB2B005A0BEA /* CameraPickerViewModel.swift */,
+				EB9DBAE22C708D98005A0BEA /* RoverPickerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -159,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				EB9DBA952C651E63005A0BEA /* NetworkManager.swift */,
+				EB9DBAE02C6E359D005A0BEA /* RoverDataManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -182,7 +183,6 @@
 			children = (
 				EB9DBA972C652148005A0BEA /* MCError.swift */,
 				EB9DBAAB2C675865005A0BEA /* Constants.swift */,
-				EB9DBAA92C675800005A0BEA /* UIHelper.swift */,
 				EB9DBACC2C6A5C93005A0BEA /* Date+Ext.swift */,
 				EB9DBAD42C6BAA1A005A0BEA /* UIViewController+Ext.swift */,
 				EB9DBACE2C6A5D8B005A0BEA /* String+Ext.swift */,
@@ -235,9 +235,12 @@
 		EB9DBAC32C6A0AA1005A0BEA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EB9DBAB52C6A0155005A0BEA /* MCDataLoadingVC.swift */,
+				EB9DBACA2C6A4AD3005A0BEA /* HomeVC.swift */,
+				EB9DBADA2C6CF55E005A0BEA /* HistoryVC.swift */,
+				EB9DBAC82C6A4A5F005A0BEA /* PhotoDetailVC.swift */,
 				EB9DBAD02C6A62FC005A0BEA /* RoverPickerVC.swift */,
 				EB9DBAD22C6BA9BE005A0BEA /* CameraPickerVC.swift */,
+				EB9DBAB52C6A0155005A0BEA /* MCDataLoadingVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -335,8 +338,10 @@
 				EB9DBAA02C6624CD005A0BEA /* PhotoCell.swift in Sources */,
 				EB9DBAB62C6A0155005A0BEA /* MCDataLoadingVC.swift in Sources */,
 				EB9DBAB22C69F3CA005A0BEA /* MCIconTextButton.swift in Sources */,
+				EB9DBAE12C6E359D005A0BEA /* RoverDataManager.swift in Sources */,
 				EB9DBACB2C6A4AD3005A0BEA /* HomeVC.swift in Sources */,
 				EB9DBA902C651DDD005A0BEA /* Camera.swift in Sources */,
+				EB9DBAE32C708D98005A0BEA /* RoverPickerViewModel.swift in Sources */,
 				EB9DBAB02C690F69005A0BEA /* HeaderView.swift in Sources */,
 				EB9DBAAC2C675865005A0BEA /* Constants.swift in Sources */,
 				EB9DBA922C651DF1005A0BEA /* Rover.swift in Sources */,
@@ -352,7 +357,6 @@
 				EB9DBA8E2C651D69005A0BEA /* PhotoResponse.swift in Sources */,
 				EB9DBAA22C662CD9005A0BEA /* MCPhotoImageView.swift in Sources */,
 				EB9DBADF2C6D03AA005A0BEA /* HistoryCell.swift in Sources */,
-				EB9DBAAA2C675801005A0BEA /* UIHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
