@@ -8,11 +8,12 @@
 import UIKit
 
 class MCDataLoadingVC: UIViewController {
+    
     var containerView: UIView!
     var emptyStateView: MCEmptyStateView?
     
     func showLoadingView() {
-        if containerView != nil { return } 
+        if containerView != nil { return }
         containerView = UIView(frame: view.bounds)
         view.addSubview(containerView)
         
@@ -50,7 +51,7 @@ class MCDataLoadingVC: UIViewController {
         
         NSLayoutConstraint.activate([
             emptyStateView!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyStateView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 202),
+            emptyStateView!.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             emptyStateView!.widthAnchor.constraint(equalTo: view.widthAnchor),
             emptyStateView!.heightAnchor.constraint(equalToConstant: 400)
         ])
@@ -68,4 +69,5 @@ class MCDataLoadingVC: UIViewController {
             self.present(ac, animated: true)
         }
     }
+    
 }

@@ -10,13 +10,10 @@ import UIKit
 class HomeVC: MCDataLoadingVC {
     
     var collectionView: UICollectionView!
-    private var viewModel = PhotosViewModel()
+    private var viewModel = HomeViewModel()
     private var headerView = HeaderView()
     private let historyButton = MCIconTextButton(icon: UIImage(resource: .historyIcon), title: nil)
-    
-    private var minDate: Date?
-    private var maxDate: Date?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHeaderView()
@@ -29,7 +26,53 @@ class HomeVC: MCDataLoadingVC {
         headerView.onSaveButtonTapped = { [weak self] in self?.presentSaveFiltersAlert() }
         
         bindViewModel()
-        viewModel.fetchRoverData()
+        viewModel.loadRoverData()
+    }
+    
+    private func bindViewModel() {
+        viewModel.didUpdatePhotos = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.dismissLoadingView()
+                self.dismissEmptyStateView()
+                
+                if self.viewModel.photos.isEmpty {
+                    self.collectionView.reloadData()
+                    self.showEmptyStateView(with: "No photos available.\nTry another date, rover or camera :)", in: self.collectionView)
+                } else {
+                    self.dismissEmptyStateView()
+                    self.collectionView.reloadData()
+                    self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                }
+            }
+        }
+        
+        viewModel.didEncounterError = { [weak self] errorMessage in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.dismissLoadingView()
+                self.dismissEmptyStateView()
+                self.collectionView.reloadData()
+                self.presentErrorOnMainThread(message: errorMessage)
+            }
+        }
+        
+        viewModel.didSetDateRange = { [weak self] minDate, maxDate in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.headerView.setDateLabel(self.viewModel.selectedDate.appPreviewString)
+            }
+        }
+        
+        viewModel.didStartLoading = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.showLoadingView() }
+        }
+        
+        viewModel.didEndLoading = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.dismissLoadingView() }
+        }
     }
     
     private func setupHeaderView() {
@@ -52,7 +95,7 @@ class HomeVC: MCDataLoadingVC {
         layout.minimumLineSpacing = 12
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .backgroundOne
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -71,7 +114,7 @@ class HomeVC: MCDataLoadingVC {
     private func setupHistoryButton() {
         historyButton.setSize(width: 70, height: 70, iconSize: 44)
         historyButton.layer.cornerRadius = 35
-        historyButton.backgroundColor = UIColor(red: 255/255, green: 105/255, blue: 44/255, alpha: 1)
+        historyButton.backgroundColor = .accentOne
         view.addSubview(historyButton)
         
         historyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -90,59 +133,7 @@ class HomeVC: MCDataLoadingVC {
         navigationController?.pushViewController(destVC, animated: true)
     }
     
-    private func bindViewModel() {
-        viewModel.didUpdatePhotos = { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.dismissLoadingView()
-                self.dismissEmptyStateView()
-                
-                if self.viewModel.photos.isEmpty {
-                    self.showEmptyStateView(with: "No photos available.\nTry another date :)", in: self.collectionView)
-                } else {
-                    self.dismissEmptyStateView()
-                    self.collectionView.reloadData()
-                    self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-                }
-            }
-        }
-        
-        viewModel.didEncounterError = { [weak self] errorMessage in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.dismissLoadingView()
-                self.dismissEmptyStateView()
-                self.collectionView.reloadData()
-                self.presentErrorOnMainThread(message: errorMessage)
-            }
-        }
-        
-        viewModel.didSetDateRange = { [weak self] minDate, maxDate in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.minDate = minDate
-                self.maxDate = maxDate
-                self.headerView.setDate(self.viewModel.selectedDateString.convertToDisplayFormat())
-            }
-        }
-        
-        viewModel.didStartLoading = { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.showLoadingView() }
-        }
-        
-        viewModel.didEndLoading = { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async { self.dismissLoadingView() }
-        }
-    }
-    
     private func presentDatePicker() {
-        guard let minDate = minDate, let maxDate = maxDate else {
-            presentErrorOnMainThread(message: "Date range not set.")
-            return
-        }
-        
         let dimmingView = UIView(frame: view.bounds)
         dimmingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4)
         dimmingView.alpha = 0
@@ -150,14 +141,14 @@ class HomeVC: MCDataLoadingVC {
         
         let datePickerView = MCDatePickerView()
         datePickerView.layer.cornerRadius = 50
-        datePickerView.setDateRange(minDate: minDate, maxDate: maxDate)
-        datePickerView.setDate(viewModel.selectedDateString)
+        datePickerView.setDateRange(minDate: viewModel.minDate, maxDate: viewModel.maxDate)
+        datePickerView.setDate(viewModel.selectedDate.convertToAPIFormat)
         datePickerView.dateSelected = { [weak self] selectedDate in
-            guard let self else {return}
-            self.headerView.setDate(selectedDate.convertToDisplayFormat())
-            self.viewModel.selectedDateString = selectedDate
-            self.viewModel.selectedRover = "All"
-            self.viewModel.selectedCamera = "All"
+            guard let self else { return }
+            self.headerView.setDateLabel(selectedDate.convertToDisplayFormat)
+            self.viewModel.selectedDate = selectedDate.convertToDate!
+            self.viewModel.selectedRoverName = "All"
+            self.viewModel.selectedCameraName = "All"
             self.headerView.roverFilterButton.changeTitle(newTitle: "All")
             self.headerView.cameraFilterButton.changeTitle(newTitle: "All")
             self.viewModel.getPhotos()
@@ -200,13 +191,14 @@ class HomeVC: MCDataLoadingVC {
     
     private func presentRoverPicker() {
         let roverPickerVC = RoverPickerVC()
-        roverPickerVC.viewModel.rovers = ["All"] + viewModel.validRovers 
+        viewModel.roverPickerViewModel = roverPickerVC.viewModel
+            
+        roverPickerVC.viewModel.rovers = ["All"] + viewModel.validRovers
         roverPickerVC.viewModel.selectedRover = headerView.roverFilterButton.title(for: .normal)
         
         roverPickerVC.onRoverSelected = { [weak self] selectedRover in
-            print("Rover selected from picker: \(selectedRover)")
             self?.headerView.roverFilterButton.changeTitle(newTitle: selectedRover)
-            self?.viewModel.updateFilters(rover: selectedRover, camera: "All")
+            self?.viewModel.updateFilters(rover: selectedRover, cameraName: "All")
             self?.headerView.cameraFilterButton.changeTitle(newTitle: "All")
             self?.viewModel.getPhotos()
         }
@@ -224,7 +216,7 @@ class HomeVC: MCDataLoadingVC {
         
         cameraPickerVC.onCameraSelected = { [weak self] selectedCamera in
             self?.headerView.cameraFilterButton.changeTitle(newTitle: selectedCamera)
-            self?.viewModel.updateFilters(rover: self?.viewModel.selectedRover, camera: selectedCamera)
+            self?.viewModel.updateFilters(rover: self?.viewModel.selectedRoverName, cameraName: selectedCamera)
             self?.viewModel.getPhotos()
         }
         
@@ -234,11 +226,22 @@ class HomeVC: MCDataLoadingVC {
     }
     
     private func presentSaveFiltersAlert() {
-        //to do
+        let ac = UIAlertController(title: "Save Filters", message: "The current filters and the date you have chosen can be saved to the filter history.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
+               self?.saveFilter()
+           }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(ac, animated: true)
     }
+    
+    @objc func saveFilter() {
+        //save filter logic
+    }
+    
 }
 
 extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.photos.count
     }
@@ -257,4 +260,5 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
         detailVC.modalPresentationStyle = .fullScreen
         present(detailVC, animated: true)
     }
+    
 }

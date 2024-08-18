@@ -20,14 +20,14 @@ class MCLabelWithAttributes: UILabel {
     func set(title: String, body: String) {
         
         let titleAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "SFPro", size: 16) ?? UIFont.systemFont(ofSize: 16),
-            .foregroundColor: UIColor(red: 160/255, green: 160/255, blue: 160/255, alpha: 1)
+            .font: UIFont.customBody,
+            .foregroundColor: UIColor.layerTwo
         ]
         let attributedText = NSMutableAttributedString(string: title, attributes: titleAttributes)
 
         let bodyAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "SFPro", size: 17) ?? UIFont.boldSystemFont(ofSize: 17),
-            .foregroundColor: UIColor.black
+            .font: UIFont.customBody2,
+            .foregroundColor: UIColor.layerOne
         ]
         let bodyString = NSAttributedString(string: body, attributes: bodyAttributes)
 
@@ -41,4 +41,5 @@ class MCLabelWithAttributes: UILabel {
         self.lineBreakMode = .byWordWrapping
         self.textAlignment = .left
     }
+    
 }

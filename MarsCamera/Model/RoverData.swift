@@ -8,5 +8,7 @@
 import Foundation
 
 struct RoverData: Codable {
+    
     var rovers: [Rover]
+    
 }

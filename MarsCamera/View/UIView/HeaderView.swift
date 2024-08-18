@@ -8,6 +8,7 @@
 import UIKit
 
 class HeaderView: UIView {
+    
     var onDateButtonTapped: (() -> Void)?
     var onRoverButtonTapped: (() -> Void)?
     var onCameraButtonTapped: (() -> Void)?
@@ -16,7 +17,7 @@ class HeaderView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "MARS.CAMERA"
-        label.font = UIFont.boldSystemFont(ofSize: 34)
+        label.font = UIFont.customLargeTitle
         
         let attributedString = NSMutableAttributedString(string: label.text ?? "")
         let letterSpacing: CGFloat = -0.4
@@ -28,7 +29,7 @@ class HeaderView: UIView {
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.customBody2
         return label
     }()
     
@@ -54,7 +55,7 @@ class HeaderView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = UIColor(red: 255/255, green: 105/255, blue: 44/255, alpha: 1)
+        backgroundColor = .accentOne
         setupTitleStack()
         setupButtonStack()
     }
@@ -74,7 +75,7 @@ class HeaderView: UIView {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor, constant: 56) ,
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 19),
-            stackView.widthAnchor.constraint(equalToConstant: 240),
+            stackView.widthAnchor.constraint(equalToConstant: 280),
             stackView.heightAnchor.constraint(equalToConstant: 68),
             
             calendarButton.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
@@ -102,7 +103,7 @@ class HeaderView: UIView {
             buttonsStackView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
             buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 38) 
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 38)
         ])
         roverFilterButton.addTarget(self, action: #selector(roverButtonTapped), for: .touchUpInside)
         cameraFilterButton.addTarget(self, action: #selector(cameraButtonTapped), for: .touchUpInside)
@@ -121,11 +122,12 @@ class HeaderView: UIView {
         onSaveButtonTapped?()
     }
     
-    func setDate(_ date: String) {
+    func setDateLabel(_ date: String) {
         subtitleLabel.text = date
     }
     
     @objc private func calendarButtonTapped() {
-        onDateButtonTapped?() 
+        onDateButtonTapped?()
     }
+    
 }

@@ -18,4 +18,5 @@ class CameraPickerViewModel {
     func getCameraFullName(for row: Int) -> String {
         return cameras[row].fullName
     }
+    
 }

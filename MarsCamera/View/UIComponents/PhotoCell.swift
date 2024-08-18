@@ -8,6 +8,7 @@
 import UIKit
 
 class PhotoCell: UICollectionViewCell {
+    
     static let reuseID = "PhotoCell"
     
     let photoImageView = MCPhotoImageView(frame: .zero)
@@ -41,14 +42,14 @@ class PhotoCell: UICollectionViewCell {
     
     private func configureCellAppearance() {
         layer.cornerRadius = 30
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.layerOne.cgColor
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 4
         
         contentView.layer.cornerRadius = 30
         contentView.layer.masksToBounds = true
-        backgroundColor = .white
+        backgroundColor = .backgroundOne
     }
     
     private func configurePhotoImageView() {
@@ -82,6 +83,7 @@ class PhotoCell: UICollectionViewCell {
         photoImageView.downloadPhoto(fromURL: photo.imgSrc)
         roverLabel.set(title: "Rover: ", body: photo.rover.name)
         cameraLabel.set(title: "Camera: ", body: photo.camera.fullName)
-        dateLabel.set(title: "Date: ", body: photo.earthDate.convertToDisplayFormat())
+        dateLabel.set(title: "Date: ", body: photo.earthDate.convertToDisplayFormat)
     }
+    
 }

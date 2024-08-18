@@ -8,13 +8,9 @@
 import Foundation
 
 class RoverPickerViewModel {
-    var rovers: [String] = []
-    var selectedRover: String? {
-        didSet {
-            print("Rover selected in view model: \(selectedRover ?? "None")")
-        }
-    }
     
+    var rovers: [String] = []
+    var selectedRover: String?
     var didUpdateRovers: (() -> Void)?
     
     func getRoverName(for row: Int) -> String {
@@ -24,4 +20,5 @@ class RoverPickerViewModel {
     func selectRover(at row: Int) {
         selectedRover = rovers[row]
     }
+    
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class MCDatePickerView: UIView {
+    
     var dateSelected: ((String) -> Void)?
     var cancelTapped: (() -> Void)?
     
@@ -34,7 +35,7 @@ class MCDatePickerView: UIView {
     private let titleLabel: UILabel = {
         let title = UILabel()
         title.text = "Date"
-        title.font = UIFont.boldSystemFont(ofSize: 22)
+        title.font = UIFont.customTitle2
         title.textAlignment = .center
         return title
     }()
@@ -50,7 +51,7 @@ class MCDatePickerView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = UIColor.white
+        backgroundColor = .backgroundOne
         layer.cornerRadius = 50
         
         addSubview(datePicker)
@@ -111,4 +112,5 @@ class MCDatePickerView: UIView {
         cancelTapped?()
         removeFromSuperview()
     }
+    
 }

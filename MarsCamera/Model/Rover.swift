@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Rover: Codable {
+struct Rover: Codable, Equatable {
+    
     let id: Int
     let name: String
     let landingDate: String
@@ -17,4 +18,5 @@ struct Rover: Codable {
     let maxDate: String
     let totalPhotos: Int
     let cameras: [CameraInfo]
+    
 }

@@ -9,7 +9,7 @@ import Foundation
 
 extension String {
     
-    func convertToDate() -> Date? {
+    var convertToDate: Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.locale = Locale(identifier: "uk_UA")
@@ -18,8 +18,10 @@ extension String {
         return dateFormatter.date(from: self)
     }
     
-    func convertToDisplayFormat() -> String {
-        guard let date = self.convertToDate() else { return "N/A" }
-        return date.convertToMonthDayYearFormat()
+    var convertToDisplayFormat: String {
+        guard let date = self.convertToDate else { return "N/A" }
+        
+        return date.appPreviewString
     }
+    
 }

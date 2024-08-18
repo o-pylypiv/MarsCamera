@@ -35,7 +35,7 @@ class HistoryVC: MCDataLoadingVC, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .backgroundOne
         setupNavigationBar()
         setupTableView()
         setEmptyState()
@@ -43,7 +43,7 @@ class HistoryVC: MCDataLoadingVC, UIGestureRecognizerDelegate {
     
     private func setupNavigationBar() {
         let navBarView = UIView()
-        navBarView.backgroundColor = UIColor(red: 255/255, green: 105/255, blue: 44/255, alpha: 1)
+        navBarView.backgroundColor = .accentOne
         view.addSubview(navBarView)
         navBarView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -97,17 +97,20 @@ class HistoryVC: MCDataLoadingVC, UIGestureRecognizerDelegate {
             historyTableView.isHidden = false
         }
     }
+    
 }
 
 extension HistoryVC: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoryCell.reuseID, for: indexPath) as! HistoryCell
-        // Set data 
+        // Set data
         cell.configure(rover: "Curiosity", camera: "Front Hazard Avoidance Camera", date: "June 6, 2019")
         return cell
     }
+    
 }

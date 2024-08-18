@@ -34,7 +34,7 @@ class CameraPickerVC: UIViewController {
     
     private func setupPickerCardView() {
         pickerCardView = UIView(frame: .zero)
-        pickerCardView.backgroundColor = .white
+        pickerCardView.backgroundColor = .backgroundOne
         pickerCardView.layer.cornerRadius = 50
         pickerCardView.layer.shadowColor = UIColor.black.cgColor
         pickerCardView.layer.shadowOpacity = 0.2
@@ -53,7 +53,7 @@ class CameraPickerVC: UIViewController {
 
         titleLabel.text = "Camera"
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        titleLabel.font = UIFont.customTitle2
 
         let stackView = UIStackView(arrangedSubviews: [cancelButton, titleLabel, confirmButton])
         stackView.axis = .horizontal
@@ -115,9 +115,11 @@ class CameraPickerVC: UIViewController {
         pickerCardView.removeFromSuperview()
         dismiss(animated: true, completion: nil)
     }
+    
 }
 
 extension CameraPickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -132,6 +134,6 @@ extension CameraPickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         viewModel.selectedCamera = viewModel.getCameraName(for: row)
-        print("Selected Camera in Picker: \(viewModel.selectedCamera ?? "None")")
     }
+    
 }

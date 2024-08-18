@@ -14,5 +14,7 @@ class PhotoDetailViewModel {
     init(photo: Photo) {
         self.photo = photo
     }
+    
     var imageURL: URL? { return URL(string: photo.imgSrc) }
+    
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class RoverPickerVC: UIViewController {
+    
     var viewModel = RoverPickerViewModel()
     var onRoverSelected: ((String) -> Void)?
     
@@ -22,11 +23,24 @@ class RoverPickerVC: UIViewController {
         setupBackgroundView()
         setupPickerCardView()
         bindViewModel()
+        
+        if let allIndex = viewModel.rovers.firstIndex(of: "All") {
+            pickerView.selectRow(allIndex, inComponent: 0, animated: false)
+            viewModel.selectRover(at: allIndex)
+        }
+    }
+    
+    private func bindViewModel() {
+        viewModel.didUpdateRovers = { [weak self] in
+            DispatchQueue.main.async {
+                self?.pickerView.reloadAllComponents()
+            }
+        }
     }
     
     private func setupPickerCardView() {
         pickerCardView = UIView(frame: .zero)
-        pickerCardView.backgroundColor = .white
+        pickerCardView.backgroundColor = .backgroundOne
         pickerCardView.layer.cornerRadius = 50
 
         pickerView = UIPickerView()
@@ -41,7 +55,7 @@ class RoverPickerVC: UIViewController {
 
         titleLabel.text = "Rover"
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        titleLabel.font = UIFont.customTitle2
 
         let stackView = UIStackView(arrangedSubviews: [cancelButton, titleLabel, confirmButton])
         stackView.axis = .horizontal
@@ -82,20 +96,8 @@ class RoverPickerVC: UIViewController {
         view.addGestureRecognizer(tapGesture)
     }
 
-    private func bindViewModel() {
-        viewModel.didUpdateRovers = { [weak self] in
-            DispatchQueue.main.async {
-                self?.pickerView.reloadAllComponents()
-            }
-        }
-    }
-
     @objc private func confirmButtonTapped() {
-        guard let selectedRover = viewModel.selectedRover else {
-            print("No rover selected!")
-            return
-        }
-        print("Confirmed Rover: \(selectedRover)")
+        guard let selectedRover = viewModel.selectedRover else { return }
         onRoverSelected?(selectedRover)
         dismissPicker()
     }
@@ -108,9 +110,11 @@ class RoverPickerVC: UIViewController {
         pickerCardView.removeFromSuperview()
         dismiss(animated: true, completion: nil)
     }
+    
 }
 
 extension RoverPickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -124,8 +128,7 @@ extension RoverPickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("Row \(row) selected")
         viewModel.selectRover(at: row)
-        print("Selected Rover is: \(viewModel.selectedRover ?? "None")")
     }
+    
 }

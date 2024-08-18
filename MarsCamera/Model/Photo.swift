@@ -8,10 +8,12 @@
 import Foundation
 
 struct Photo: Codable {
+    
     let id: Int
     let sol: Int
     let camera: Camera
     let imgSrc: String
     let earthDate: String
     let rover: Rover
+    
 }

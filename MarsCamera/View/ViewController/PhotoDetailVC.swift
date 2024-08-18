@@ -8,6 +8,7 @@
 import UIKit
 
 class PhotoDetailVC: UIViewController {
+    
     private var viewModel: PhotoDetailViewModel?
     
     private let imageView = UIImageView()
@@ -81,7 +82,9 @@ class PhotoDetailVC: UIViewController {
 }
 
 extension PhotoDetailVC: UIScrollViewDelegate {
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
+    
 }

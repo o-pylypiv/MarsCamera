@@ -13,8 +13,8 @@ class HistoryCell: UITableViewCell {
     
     private let roverLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .black
+        label.font = UIFont.customBody2
+        label.textColor = .layerOne
         return label
     }()
     
@@ -51,7 +51,7 @@ class HistoryCell: UITableViewCell {
     }
     
     private func setupCell() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .backgroundOne
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
         contentView.layer.borderWidth = 1
@@ -84,4 +84,5 @@ class HistoryCell: UITableViewCell {
         cameraLabel.text = "Camera: \(camera)"
         dateLabel.text = "Date: \(date)"
     }
+    
 }

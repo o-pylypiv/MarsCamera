@@ -28,8 +28,8 @@ class MCIconTextButton: UIButton {
         addSubview(iconImageView)
         
         buttonLabel.text = title
-        buttonLabel.textColor = .black
-        buttonLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        buttonLabel.textColor = .layerOne
+        buttonLabel.font = UIFont.customBody2
         buttonLabel.numberOfLines = 1
         buttonLabel.adjustsFontSizeToFitWidth = true
         buttonLabel.minimumScaleFactor = 0.7
@@ -90,4 +90,5 @@ class MCIconTextButton: UIButton {
     func getTitle() -> String? {
         return buttonLabel.text
     }
+    
 }

@@ -9,17 +9,18 @@ import Foundation
 
 extension Date {
     
-    func convertToMonthDayYearFormat() -> String {
+    var appPreviewString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy"
         
         return dateFormatter.string(from: self)
     }
     
-    func convertToAPIFormat() -> String {
+    var convertToAPIFormat: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         return dateFormatter.string(from: self)
     }
+    
 }

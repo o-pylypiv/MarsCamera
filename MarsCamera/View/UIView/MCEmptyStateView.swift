@@ -8,6 +8,7 @@
 import UIKit
 
 class MCEmptyStateView: UIView {
+    
     let messageLabel = UILabel()
     let placeholderImageView = UIImageView()
     
@@ -32,7 +33,7 @@ class MCEmptyStateView: UIView {
         
         configureLogoImageView()
         configureMessageLabel()
-        backgroundColor = .white
+        backgroundColor = .backgroundOne
     }
     
     private func configureLogoImageView() {
@@ -49,9 +50,9 @@ class MCEmptyStateView: UIView {
     
     private func configureMessageLabel() {
         messageLabel.textAlignment = .center
-        messageLabel.font = UIFont.systemFont(ofSize: 16)
+        messageLabel.font = UIFont.customBody
 
-        messageLabel.textColor = UIColor(red: 160/255, green: 160/255, blue: 160/255, alpha: 1)
+        messageLabel.textColor = .layerTwo
         messageLabel.adjustsFontSizeToFitWidth = true
         messageLabel.minimumScaleFactor = 0.9
         messageLabel.lineBreakMode = .byWordWrapping
@@ -65,4 +66,5 @@ class MCEmptyStateView: UIView {
             messageLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
     }
+    
 }
