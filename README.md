@@ -18,6 +18,7 @@ The search function in this app is built using data about rovers. The date picke
 - Browse photos taken by various Mars rovers.
 - Filter images by rover, camera, and date.
 - View full-screen images with zoom and scroll functionality.
+- Save search filters for quick access.
 
 ## Screenshots
 
@@ -39,6 +40,12 @@ The search function in this app is built using data about rovers. The date picke
   <em>Full-Screen Photo View</em>
 </p>
 
+<p align="center">
+  <img src="screenshots/history_screen.png" alt="History Screen" width="200"/>
+  <br/>
+  <em>History Screen</em>
+</p>
+
 ## Requirements
 
 - iOS 13.0+
@@ -52,6 +59,7 @@ The search function in this app is built using data about rovers. The date picke
 3. Tap to apply filters and to load photos based on the selected criteria.
 4. Scroll through the grid of images, and tap on a photo to view it in full-screen mode.
 5. Pinch to zoom and swipe to scroll in the full-screen photo viewer.
+6. Save your filter settings for quick access in future sessions.
 
 ## Possible Improvements
 
@@ -60,4 +68,3 @@ The search function in this app is built using data about rovers. The date picke
 - Implement an offline mode with persistent storage for viewing previously loaded photos without an internet connection.
 - Add animations for transitioning between views and interacting with the UI elements.
 - Save search filters for quick access.
-- Integrate CoreData or Realm for storing and managing the user's search history and favorite photos.
