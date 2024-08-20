@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="SavedFilter" representedClassName="SavedFilter" syncable="YES">
+        <attribute name="cameraFullName" optional="YES" attributeType="String"/>
+        <attribute name="cameraName" optional="YES" attributeType="String"/>
+        <attribute name="photoDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="roverName" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+</model>

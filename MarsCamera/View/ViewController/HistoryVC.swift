@@ -9,12 +9,14 @@ import UIKit
 
 class HistoryVC: MCDataLoadingVC, UIGestureRecognizerDelegate {
     
-    let historyItems: [String] = []
-
+    var viewModel = HistoryViewModel()
+    var historyCollectionView: UICollectionView!
+    private let navBarView = UIView()
+    
     private let historyLabel: UILabel = {
         let label = UILabel()
         label.text = "History"
-        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.font = UIFont.customLargeTitle
         label.textAlignment = .center
         return label
     }()
@@ -25,24 +27,55 @@ class HistoryVC: MCDataLoadingVC, UIGestureRecognizerDelegate {
         return button
     }()
     
-    private let historyTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-        tableView.register(HistoryCell.self, forCellReuseIdentifier: HistoryCell.reuseID)
-        return tableView
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .backgroundOne
         setupNavigationBar()
-        setupTableView()
-        setEmptyState()
+        setupCollectionView()
+        
+        bindViewModel()
+        viewModel.getAllSavedFilters()
+    }
+    
+    private func bindViewModel() {
+        viewModel.didUpdateItems = { [weak self] in
+            guard let self else { return }
+            DispatchQueue.main.async {
+                self.dismissLoadingView()
+                self.dismissEmptyStateView()
+                
+                if self.viewModel.savedFilters.isEmpty {
+                    self.historyCollectionView.reloadData()
+                    self.showEmptyStateView(with: "Browsing history is empty.", in: self.historyCollectionView)
+                } else {
+                    self.dismissEmptyStateView()
+                    self.historyCollectionView.reloadData()
+                    self.historyCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+                }
+            }
+        }
+        
+        viewModel.didEncounterError = { [weak self] errorMessage in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.dismissLoadingView()
+                self.dismissEmptyStateView()
+                self.historyCollectionView.reloadData()
+                self.presentErrorOnMainThread(message: errorMessage)
+            }
+        }
+        viewModel.didStartLoading = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.showLoadingView() }
+        }
+        
+        viewModel.didEndLoading = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async { self.dismissLoadingView() }
+        }
     }
     
     private func setupNavigationBar() {
-        let navBarView = UIView()
         navBarView.backgroundColor = .accentOne
         view.addSubview(navBarView)
         navBarView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,17 +103,26 @@ class HistoryVC: MCDataLoadingVC, UIGestureRecognizerDelegate {
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
-    private func setupTableView() {
-        view.addSubview(historyTableView)
-        historyTableView.translatesAutoresizingMaskIntoConstraints = false
-        historyTableView.dataSource = self
-        historyTableView.delegate = self
+    private func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width - 32, height: 150)
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 12
         
+        historyCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        historyCollectionView.backgroundColor = .backgroundOne
+        historyCollectionView.delegate = self
+        historyCollectionView.dataSource = self
+    
+        historyCollectionView.register(HistoryCell.self, forCellWithReuseIdentifier: HistoryCell.reuseID)
+        view.addSubview(historyCollectionView)
+        
+        historyCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            historyTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 132),
-            historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            historyTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            historyCollectionView.topAnchor.constraint(equalTo: navBarView.bottomAnchor),
+            historyCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            historyCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            historyCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -88,29 +130,34 @@ class HistoryVC: MCDataLoadingVC, UIGestureRecognizerDelegate {
         navigationController?.popViewController(animated: true)
     }
     
-    private func setEmptyState() {
-        if historyItems.isEmpty {
-            showEmptyStateView(with: "Browsing history is empty.", in: view)
-            historyTableView.isHidden = true
-        } else {
-            dismissEmptyStateView()
-            historyTableView.isHidden = false
-        }
-    }
-    
 }
 
-extension HistoryVC: UITableViewDataSource, UITableViewDelegate {
+extension HistoryVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.savedFilters.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HistoryCell.reuseID, for: indexPath) as! HistoryCell
-        // Set data
-        cell.configure(rover: "Curiosity", camera: "Front Hazard Avoidance Camera", date: "June 6, 2019")
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = historyCollectionView.dequeueReusableCell(withReuseIdentifier: HistoryCell.reuseID, for: indexPath) as! HistoryCell
+        let filterItem = viewModel.savedFilters[indexPath.row]
+        cell.set(filter: filterItem)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let ac = UIAlertController(title: "Menu Filter", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Use", style: .default, handler: { _ in
+            let selectedFilterItem = self.viewModel.savedFilters[indexPath.row]
+            self.viewModel.applyFilter(filter: selectedFilterItem)
+        }))
+        ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            let selectedFilterItem = self.viewModel.savedFilters[indexPath.row]
+            self.viewModel.deleteFilter(filter: selectedFilterItem)
+            self.historyCollectionView.reloadData()
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
     }
     
 }

@@ -33,6 +33,9 @@ class PhotoDetailVC: UIViewController {
     private func setupView() {
         view.backgroundColor = .black
         
+        let padding: CGFloat = 16
+        let buttonSize: CGFloat = 44
+        
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 4.0
@@ -60,10 +63,10 @@ class PhotoDetailVC: UIViewController {
             imageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             imageView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
-            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            cancelButton.widthAnchor.constraint(equalToConstant: 44),
-            cancelButton.heightAnchor.constraint(equalToConstant: 44)
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            cancelButton.widthAnchor.constraint(equalToConstant: buttonSize),
+            cancelButton.heightAnchor.constraint(equalToConstant: buttonSize)
         ])
     }
     

@@ -10,7 +10,7 @@ import UIKit
 class HomeVC: MCDataLoadingVC {
     
     var collectionView: UICollectionView!
-    private var viewModel = HomeViewModel()
+    private var viewModel: HomeViewModel
     private var headerView = HeaderView()
     private let historyButton = MCIconTextButton(icon: UIImage(resource: .historyIcon), title: nil)
         
@@ -27,6 +27,16 @@ class HomeVC: MCDataLoadingVC {
         
         bindViewModel()
         viewModel.loadRoverData()
+    }
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.viewModel = HomeViewModel()
+        super.init(coder: coder)
     }
     
     private func bindViewModel() {
@@ -112,7 +122,9 @@ class HomeVC: MCDataLoadingVC {
     }
     
     private func setupHistoryButton() {
-        historyButton.setSize(width: 70, height: 70, iconSize: 44)
+        let buttonSize: CGFloat = 70
+        
+        historyButton.setSize(width: buttonSize, height: buttonSize, iconSize: 44)
         historyButton.layer.cornerRadius = 35
         historyButton.backgroundColor = .accentOne
         view.addSubview(historyButton)
@@ -121,16 +133,38 @@ class HomeVC: MCDataLoadingVC {
         NSLayoutConstraint.activate([
             historyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             historyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -21),
-            historyButton.widthAnchor.constraint(equalToConstant: 70),
-            historyButton.heightAnchor.constraint(equalToConstant: 70)
+            historyButton.widthAnchor.constraint(equalToConstant: buttonSize),
+            historyButton.heightAnchor.constraint(equalToConstant: buttonSize)
         ])
         
         historyButton.addTarget(self, action: #selector(pushHistoryVC), for: .touchUpInside)
     }
     
     @objc private func pushHistoryVC() {
-        let destVC = HistoryVC()
-        navigationController?.pushViewController(destVC, animated: true)
+        let historyVC = HistoryVC()
+        historyVC.viewModel.onFilterApplied = { [weak self] selectedDate, selectedRoverName, selectedCameraName in
+            guard let self = self else { return }
+            
+            self.viewModel.selectedDate = selectedDate ?? Date()
+            self.viewModel.selectedRoverName = selectedRoverName
+            self.viewModel.selectedCameraName = selectedCameraName
+            
+            self.updateUIElements()
+            self.viewModel.getPhotos()
+
+            self.navigationController?.popViewController(animated: true)
+        }
+        navigationController?.pushViewController(historyVC, animated: true)
+    }
+
+    private func updateUIElements() {
+        self.headerView.setDateLabel(self.viewModel.selectedDate.appPreviewString)
+
+        let roverTitle = self.viewModel.selectedRoverName ?? "All"
+        self.headerView.roverFilterButton.changeTitle(newTitle: roverTitle)
+
+        let cameraTitle = self.viewModel.selectedCameraName ?? "All"
+        self.headerView.cameraFilterButton.changeTitle(newTitle: cameraTitle)
     }
     
     private func presentDatePicker() {
@@ -207,11 +241,24 @@ class HomeVC: MCDataLoadingVC {
         roverPickerVC.modalTransitionStyle = .crossDissolve
         present(roverPickerVC, animated: true)
     }
-
+    
     private func presentCameraPicker() {
         let cameraPickerVC = CameraPickerVC()
-        cameraPickerVC.viewModel.cameras = viewModel.validCameras
-        cameraPickerVC.viewModel.cameras.insert(CameraInfo(name: "All", fullName: "All") , at: 0)
+        
+        if viewModel.selectedRoverName == "All" {
+            cameraPickerVC.viewModel.cameras = viewModel.validCameras
+        } else {
+            if let selectedRover = viewModel.rovers.first(where: { $0.name == viewModel.selectedRoverName }) {
+                cameraPickerVC.viewModel.cameras = selectedRover.cameras
+            } else {
+                cameraPickerVC.viewModel.cameras = []
+            }
+        }
+
+        if !cameraPickerVC.viewModel.cameras.contains(where: { $0.name == "All" }) {
+            cameraPickerVC.viewModel.cameras.insert(CameraInfo(name: "All", fullName: "All"), at: 0)
+        }
+        
         cameraPickerVC.viewModel.selectedRover = headerView.roverFilterButton.getTitle()
         
         cameraPickerVC.onCameraSelected = { [weak self] selectedCamera in
@@ -235,7 +282,7 @@ class HomeVC: MCDataLoadingVC {
     }
     
     @objc func saveFilter() {
-        //save filter logic
+        viewModel.addFiltersToHistory()
     }
     
 }

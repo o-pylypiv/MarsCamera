@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB002C142C73D706007B72F6 /* SavedFilter+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002C122C73D706007B72F6 /* SavedFilter+CoreDataClass.swift */; };
+		EB002C152C73D706007B72F6 /* SavedFilter+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002C132C73D706007B72F6 /* SavedFilter+CoreDataProperties.swift */; };
+		EB002C192C746F2F007B72F6 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002C182C746F2F007B72F6 /* HistoryViewModel.swift */; };
+		EB4B6A112C73C64F003FB358 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4B6A102C73C64E003FB358 /* CoreData.framework */; };
+		EB4B6A142C73C6BB003FB358 /* HistoryDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB4B6A122C73C6BB003FB358 /* HistoryDataModel.xcdatamodeld */; };
 		EB9DBA792C650102005A0BEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA782C650102005A0BEA /* AppDelegate.swift */; };
 		EB9DBA7B2C650102005A0BEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9DBA7A2C650102005A0BEA /* SceneDelegate.swift */; };
 		EB9DBA802C650102005A0BEA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EB9DBA7F2C650102005A0BEA /* Base */; };
@@ -63,7 +68,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EB9DBA752C650102005A0BEA /* MarsCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarsCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB002C122C73D706007B72F6 /* SavedFilter+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedFilter+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EB002C132C73D706007B72F6 /* SavedFilter+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedFilter+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EB002C182C746F2F007B72F6 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		EB4B6A102C73C64E003FB358 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EB4B6A132C73C6BB003FB358 /* HistoryDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HistoryDataModel.xcdatamodel; sourceTree = "<group>"; };
+		EB9DBA752C650102005A0BEA /* MarsCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MarsCamera.app; path = "/Users/olhapylypiv/Desktop/Developer/MarsCamera/build/Debug-iphoneos/MarsCamera.app"; sourceTree = "<absolute>"; };
 		EB9DBA782C650102005A0BEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB9DBA7A2C650102005A0BEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EB9DBA7F2C650102005A0BEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,7 +114,7 @@
 		EB9DBAE72C726280005A0BEA /* MockRoverDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRoverDataProvider.swift; sourceTree = "<group>"; };
 		EB9DBAE92C72630D005A0BEA /* MCDataProviderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCDataProviderError.swift; sourceTree = "<group>"; };
 		EB9DBAEB2C726946005A0BEA /* MCFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCFonts.swift; sourceTree = "<group>"; };
-		EB9DBAF12C726FCB005A0BEA /* MarsCameraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarsCameraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB9DBAF12C726FCB005A0BEA /* MarsCameraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = MarsCameraTests.xctest; path = "/Users/olhapylypiv/Desktop/Developer/MarsCamera/build/Debug-iphoneos/MarsCamera.app/PlugIns/MarsCameraTests.xctest"; sourceTree = "<absolute>"; };
 		EB9DBAF32C726FCB005A0BEA /* MarsCameraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsCameraTests.swift; sourceTree = "<group>"; };
 		EB9DBAFA2C7270AE005A0BEA /* MockRoverDataProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRoverDataProviderTests.swift; sourceTree = "<group>"; };
 		EB9DBAFC2C727410005A0BEA /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
@@ -116,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4B6A112C73C64F003FB358 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,22 +140,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB002C162C73D73B007B72F6 /* SavedFilter */ = {
+			isa = PBXGroup;
+			children = (
+				EB002C122C73D706007B72F6 /* SavedFilter+CoreDataClass.swift */,
+				EB002C132C73D706007B72F6 /* SavedFilter+CoreDataProperties.swift */,
+			);
+			path = SavedFilter;
+			sourceTree = "<group>";
+		};
+		EB002C172C746EFE007B72F6 /* MockFiles */ = {
+			isa = PBXGroup;
+			children = (
+				EB9DBAFC2C727410005A0BEA /* MockNetworkManager.swift */,
+				EB9DBAE72C726280005A0BEA /* MockRoverDataProvider.swift */,
+			);
+			path = MockFiles;
+			sourceTree = "<group>";
+		};
+		EB4B6A0F2C73C64E003FB358 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EB4B6A102C73C64E003FB358 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EB9DBA6C2C650102005A0BEA = {
 			isa = PBXGroup;
 			children = (
+				EB002C162C73D73B007B72F6 /* SavedFilter */,
 				EB9DBA772C650102005A0BEA /* MarsCamera */,
 				EB9DBAF22C726FCB005A0BEA /* MarsCameraTests */,
-				EB9DBA762C650102005A0BEA /* Products */,
+				EB4B6A0F2C73C64E003FB358 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		EB9DBA762C650102005A0BEA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EB9DBA752C650102005A0BEA /* MarsCamera.app */,
-				EB9DBAF12C726FCB005A0BEA /* MarsCameraTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		EB9DBA772C650102005A0BEA /* MarsCamera */ = {
@@ -155,10 +184,10 @@
 				EB9DBA9E2C6604C0005A0BEA /* Services */,
 				EB9DBAA42C662F79005A0BEA /* Utilities */,
 				EB9DBAA32C662F4E005A0BEA /* View */,
-				EB9DBAE72C726280005A0BEA /* MockRoverDataProvider.swift */,
-				EB9DBAFC2C727410005A0BEA /* MockNetworkManager.swift */,
+				EB002C172C746EFE007B72F6 /* MockFiles */,
 				EB9DBA7A2C650102005A0BEA /* SceneDelegate.swift */,
 				EB9DBA782C650102005A0BEA /* AppDelegate.swift */,
+				EB4B6A122C73C6BB003FB358 /* HistoryDataModel.xcdatamodeld */,
 				EB9DBA7E2C650102005A0BEA /* Main.storyboard */,
 				EB9DBA812C650106005A0BEA /* Assets.xcassets */,
 				EB9DBA832C650106005A0BEA /* LaunchScreen.storyboard */,
@@ -184,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				EB9DBA9B2C6527CC005A0BEA /* HomeViewModel.swift */,
+				EB002C182C746F2F007B72F6 /* HistoryViewModel.swift */,
 				EB9DBAC62C6A497C005A0BEA /* PhotoDetailViewModel.swift */,
 				EB9DBAD62C6BAB2B005A0BEA /* CameraPickerViewModel.swift */,
 				EB9DBAE22C708D98005A0BEA /* RoverPickerViewModel.swift */,
@@ -335,7 +365,7 @@
 				Base,
 			);
 			mainGroup = EB9DBA6C2C650102005A0BEA;
-			productRefGroup = EB9DBA762C650102005A0BEA /* Products */;
+			productRefGroup = EB9DBA6C2C650102005A0BEA;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -385,10 +415,14 @@
 				EB9DBA9C2C6527CC005A0BEA /* HomeViewModel.swift in Sources */,
 				EB9DBAA02C6624CD005A0BEA /* PhotoCell.swift in Sources */,
 				EB9DBAB62C6A0155005A0BEA /* MCDataLoadingVC.swift in Sources */,
+				EB002C192C746F2F007B72F6 /* HistoryViewModel.swift in Sources */,
 				EB9DBAB22C69F3CA005A0BEA /* MCIconTextButton.swift in Sources */,
+				EB4B6A142C73C6BB003FB358 /* HistoryDataModel.xcdatamodeld in Sources */,
 				EB9DBAE12C6E359D005A0BEA /* RoverDataManager.swift in Sources */,
 				EB9DBACB2C6A4AD3005A0BEA /* HomeVC.swift in Sources */,
 				EB9DBAEC2C726946005A0BEA /* MCFonts.swift in Sources */,
+				EB002C142C73D706007B72F6 /* SavedFilter+CoreDataClass.swift in Sources */,
+				EB002C152C73D706007B72F6 /* SavedFilter+CoreDataProperties.swift in Sources */,
 				EB9DBA902C651DDD005A0BEA /* Camera.swift in Sources */,
 				EB9DBAE32C708D98005A0BEA /* RoverPickerViewModel.swift in Sources */,
 				EB9DBAB02C690F69005A0BEA /* HeaderView.swift in Sources */,
@@ -702,6 +736,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EB4B6A122C73C6BB003FB358 /* HistoryDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EB4B6A132C73C6BB003FB358 /* HistoryDataModel.xcdatamodel */,
+			);
+			currentVersion = EB4B6A132C73C6BB003FB358 /* HistoryDataModel.xcdatamodel */;
+			name = HistoryDataModel.xcdatamodeld;
+			path = /Users/olhapylypiv/Desktop/Developer/MarsCamera/MarsCamera/HistoryDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EB9DBA6D2C650102005A0BEA /* Project object */;
 }

@@ -35,19 +35,20 @@ class MCIconTextButton: UIButton {
         buttonLabel.minimumScaleFactor = 0.7
         
         if title != nil {
+            let padding: CGFloat = 10
             buttonLabel.isHidden = false
             addSubview(buttonLabel)
             iconImageView.translatesAutoresizingMaskIntoConstraints = false
             buttonLabel.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
-                iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+                iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
                 iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
                 iconImageView.widthAnchor.constraint(equalToConstant: 20),
                 iconImageView.heightAnchor.constraint(equalToConstant: 20),
                 
-                buttonLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 10),
-                buttonLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+                buttonLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: padding),
+                buttonLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
                 buttonLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
             ])
         } else {

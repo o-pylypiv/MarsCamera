@@ -37,12 +37,13 @@ class MCEmptyStateView: UIView {
     }
     
     private func configureLogoImageView() {
+        let imageSize: CGFloat = 145
         placeholderImageView.image = UIImage(resource: .emptyPlaceholder)
         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            placeholderImageView.widthAnchor.constraint(equalToConstant: 145),
-            placeholderImageView.heightAnchor.constraint(equalToConstant: 145),
+            placeholderImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            placeholderImageView.heightAnchor.constraint(equalToConstant: imageSize),
             placeholderImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             placeholderImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -40)
         ])

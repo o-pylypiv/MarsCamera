@@ -86,9 +86,11 @@ class HeaderView: UIView {
     }
     
     private func setupButtonStack() {
-        roverFilterButton.setSize(width: 140, height: 38, iconSize: nil)
-        cameraFilterButton.setSize(width: 140, height: 38, iconSize: nil)
-        saveFiltersButton.setSize(width: 38, height: 38, iconSize: nil)
+        let buttonWidth: CGFloat = 140
+        let buttonHeight: CGFloat = 38
+        roverFilterButton.setSize(width: buttonWidth, height: buttonHeight, iconSize: nil)
+        cameraFilterButton.setSize(width: buttonWidth, height: buttonHeight, iconSize: nil)
+        saveFiltersButton.setSize(width: buttonHeight, height: buttonHeight, iconSize: nil)
         
         let buttonsStackView = UIStackView(arrangedSubviews: [roverFilterButton, cameraFilterButton, saveFiltersButton])
         buttonsStackView.axis = .horizontal
@@ -98,12 +100,13 @@ class HeaderView: UIView {
         
         addSubview(buttonsStackView)
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+        let padding: CGFloat = 20
         
         NSLayoutConstraint.activate([
-            buttonsStackView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
-            buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            buttonsStackView.heightAnchor.constraint(equalToConstant: 38)
+            buttonsStackView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: padding),
+            buttonsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            buttonsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: buttonHeight)
         ])
         roverFilterButton.addTarget(self, action: #selector(roverButtonTapped), for: .touchUpInside)
         cameraFilterButton.addTarget(self, action: #selector(cameraButtonTapped), for: .touchUpInside)

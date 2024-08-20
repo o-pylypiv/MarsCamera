@@ -70,20 +70,21 @@ class MCDatePickerView: UIView {
         confirmButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        let padding: CGFloat = 20
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            cancelButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            cancelButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            cancelButton.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            cancelButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             
-            confirmButton.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            confirmButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            confirmButton.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            confirmButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             
-            datePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            datePicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            datePicker.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            datePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
+            datePicker.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            datePicker.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
         ])
     }
     

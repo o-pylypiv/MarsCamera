@@ -22,6 +22,8 @@ class CameraPickerVC: UIViewController {
         super.viewDidLoad()
         setupBackgroundView()
         setupPickerCardView()
+        
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +31,14 @@ class CameraPickerVC: UIViewController {
 
         if let selectedCamera = viewModel.selectedCamera, let index = viewModel.cameras.firstIndex(where: { $0.name == selectedCamera }) {
             pickerView.selectRow(index, inComponent: 0, animated: false)
+        }
+    }
+    
+    private func bindViewModel() {
+        viewModel.didUpdateCameras = { [weak self] in
+            DispatchQueue.main.async {
+                self?.pickerView.reloadAllComponents()
+            }
         }
     }
     
@@ -63,6 +73,7 @@ class CameraPickerVC: UIViewController {
         view.addSubview(pickerCardView)
         pickerCardView.addSubview(pickerView)
         pickerCardView.addSubview(stackView)
+        let padding: CGFloat = 16
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,15 +85,15 @@ class CameraPickerVC: UIViewController {
             pickerCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             pickerCardView.heightAnchor.constraint(equalToConstant: 310),
             
-            stackView.topAnchor.constraint(equalTo: pickerCardView.topAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: pickerCardView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: pickerCardView.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: pickerCardView.topAnchor, constant: padding/2),
+            stackView.leadingAnchor.constraint(equalTo: pickerCardView.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: pickerCardView.trailingAnchor, constant: -padding),
             stackView.heightAnchor.constraint(equalToConstant: 50),
             
-            pickerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 8),
+            pickerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: padding/2),
             pickerView.leadingAnchor.constraint(equalTo: pickerCardView.leadingAnchor),
             pickerView.trailingAnchor.constraint(equalTo: pickerCardView.trailingAnchor),
-            pickerView.bottomAnchor.constraint(equalTo: pickerCardView.bottomAnchor, constant: -8)
+            pickerView.bottomAnchor.constraint(equalTo: pickerCardView.bottomAnchor, constant: -padding/2)
         ])
     }
     

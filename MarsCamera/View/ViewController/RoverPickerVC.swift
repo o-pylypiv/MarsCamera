@@ -22,6 +22,7 @@ class RoverPickerVC: UIViewController {
         super.viewDidLoad()
         setupBackgroundView()
         setupPickerCardView()
+        
         bindViewModel()
         
         if let allIndex = viewModel.rovers.firstIndex(of: "All") {
@@ -65,6 +66,7 @@ class RoverPickerVC: UIViewController {
         view.addSubview(pickerCardView)
         pickerCardView.addSubview(pickerView)
         pickerCardView.addSubview(stackView)
+        let padding: CGFloat = 16
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,15 +78,15 @@ class RoverPickerVC: UIViewController {
             pickerCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             pickerCardView.heightAnchor.constraint(equalToConstant: 310),
             
-            stackView.topAnchor.constraint(equalTo: pickerCardView.topAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: pickerCardView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: pickerCardView.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: pickerCardView.topAnchor, constant: padding/2),
+            stackView.leadingAnchor.constraint(equalTo: pickerCardView.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: pickerCardView.trailingAnchor, constant: -padding),
             stackView.heightAnchor.constraint(equalToConstant: 50),
             
-            pickerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 8),
+            pickerView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: padding/2),
             pickerView.leadingAnchor.constraint(equalTo: pickerCardView.leadingAnchor),
             pickerView.trailingAnchor.constraint(equalTo: pickerCardView.trailingAnchor),
-            pickerView.bottomAnchor.constraint(equalTo: pickerCardView.bottomAnchor, constant: -8)
+            pickerView.bottomAnchor.constraint(equalTo: pickerCardView.bottomAnchor, constant: -padding/2)
         ])
     }
     

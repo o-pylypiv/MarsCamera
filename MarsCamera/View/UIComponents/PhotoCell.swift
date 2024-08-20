@@ -17,6 +17,7 @@ class PhotoCell: UICollectionViewCell {
     let dateLabel = MCLabelWithAttributes()
     
     let padding: CGFloat = 16
+    let spacing: CGFloat = 10
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,7 +43,7 @@ class PhotoCell: UICollectionViewCell {
     
     private func configureCellAppearance() {
         layer.cornerRadius = 30
-        layer.shadowColor = UIColor.layerOne.cgColor
+        layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.1
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 4
@@ -55,7 +56,7 @@ class PhotoCell: UICollectionViewCell {
     private func configurePhotoImageView() {
         NSLayoutConstraint.activate([
             photoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            photoImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -spacing),
             photoImageView.heightAnchor.constraint(equalToConstant: 130),
             photoImageView.widthAnchor.constraint(equalTo: photoImageView.heightAnchor),
         ])
@@ -65,7 +66,7 @@ class PhotoCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             roverLabel.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: padding),
             roverLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            roverLabel.trailingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant: -10),
+            roverLabel.trailingAnchor.constraint(equalTo: photoImageView.leadingAnchor, constant: -spacing),
             
             cameraLabel.topAnchor.constraint(equalTo: roverLabel.bottomAnchor, constant: 4),
             cameraLabel.leadingAnchor.constraint(equalTo: roverLabel.leadingAnchor),

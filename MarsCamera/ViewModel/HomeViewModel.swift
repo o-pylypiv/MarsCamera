@@ -27,6 +27,8 @@ class HomeViewModel: DataLoadableViewModel {
     var roverDataManager: RoverDataProvider
     var networkingManager: NetworkManager
     var roverPickerViewModel: RoverPickerViewModel?
+    var cameraPickerViewModel: CameraPickerViewModel?
+    var historyViewModel: HistoryViewModel?
     
     var photos: [Photo] = []
     var selectedDate: Date = Date()
@@ -110,22 +112,40 @@ class HomeViewModel: DataLoadableViewModel {
     func getValidRoversAndCameras(for date: Date) {
         var validRovers: [Rover] = []
         var validCamerasSet: Set<CameraInfo> = []
-        
+
         for rover in rovers {
             if let landingDate = rover.landingDate.convertToDate,
                let maxDate = rover.maxDate.convertToDate,
                landingDate <= date && date <= maxDate {
                 validRovers.append(rover)
-                validCamerasSet.formUnion(rover.cameras)
+
+                if selectedRoverName == "All" {
+                    validCamerasSet.formUnion(rover.cameras)
+                } else if rover.name == selectedRoverName {
+                    validCamerasSet.formUnion(rover.cameras)
+                }
             }
         }
-        
+
         self.validRovers = validRovers.map { $0.name }
         self.validCameras = Array(validCamerasSet)
-        
+
         roverPickerViewModel?.rovers = ["All"] + self.validRovers
         roverPickerViewModel?.didUpdateRovers?()
+        
+        cameraPickerViewModel?.cameras = self.validCameras
+        cameraPickerViewModel?.didUpdateCameras?()
+        
         didUpdatePickers?()
+    }
+    
+    func addFiltersToHistory() {
+        let historyViewModel = HistoryViewModel(
+            selectedDate: self.selectedDate,
+            selectedRoverName: self.selectedRoverName,
+            selectedCameraName: self.selectedCameraName
+        )
+        historyViewModel.saveFilter()
     }
     
 }

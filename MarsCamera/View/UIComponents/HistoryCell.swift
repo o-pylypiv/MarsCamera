@@ -7,82 +7,95 @@
 
 import UIKit
 
-class HistoryCell: UITableViewCell {
+class HistoryCell: UICollectionViewCell {
     
     static let reuseID = "HistoryCell"
     
-    private let roverLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.customBody2
-        label.textColor = .layerOne
-        return label
-    }()
+    let roverLabel = MCLabelWithAttributes()
+    let cameraLabel = MCLabelWithAttributes()
+    let dateLabel = MCLabelWithAttributes()
+    let separatorView = UIView()
+    let filtersTitleLabel = UILabel()
     
-    private let cameraLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .darkGray
-        return label
-    }()
-    
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .darkGray
-        return label
-    }()
-    
-    private let filtersButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Filters", for: .normal)
-        button.setTitleColor(.orange, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        return button
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupCell()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        configureUIElements()
         setupCell()
     }
     
-    private func setupCell() {
-        contentView.backgroundColor = .backgroundOne
-        contentView.layer.cornerRadius = 10
+    private func configureUIElements() {
+        layer.cornerRadius = 30
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.1
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 4
+        
+        contentView.layer.cornerRadius = 30
         contentView.layer.masksToBounds = true
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.orange.cgColor
+        backgroundColor = .backgroundOne
         
-        let stackView = UIStackView(arrangedSubviews: [roverLabel, cameraLabel, dateLabel])
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 4
+        separatorView.backgroundColor = .accentOne
         
-        contentView.addSubview(stackView)
-        contentView.addSubview(filtersButton)
+        filtersTitleLabel.text = "Filters"
+        filtersTitleLabel.font = .customTitle2
+        filtersTitleLabel.textColor = .accentOne
+    }
+    
+    private func setupCell() {
+        let padding: CGFloat = 16
+        let spacing: CGFloat = 10
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        filtersButton.translatesAutoresizingMaskIntoConstraints = false
+        let labelStackView = UIStackView(arrangedSubviews: [roverLabel, cameraLabel, dateLabel])
+        labelStackView.axis = .vertical
+        labelStackView.alignment = .leading
+        labelStackView.spacing = 6
+        
+        contentView.addSubview(separatorView)
+        contentView.addSubview(filtersTitleLabel)
+        contentView.addSubview(labelStackView)
+        
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        filtersTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        labelStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            filtersTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: spacing),
+            filtersTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            filtersTitleLabel.heightAnchor.constraint(equalToConstant: 28),
+            filtersTitleLabel.widthAnchor.constraint(equalToConstant: 70),
             
-            filtersButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            filtersButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            separatorView.trailingAnchor.constraint(equalTo: filtersTitleLabel.leadingAnchor, constant: -spacing),
+            separatorView.centerYAnchor.constraint(equalTo: filtersTitleLabel.centerYAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1),
             
-            contentView.heightAnchor.constraint(equalToConstant: 80)
+            labelStackView.topAnchor.constraint(greaterThanOrEqualTo: filtersTitleLabel.bottomAnchor, constant: 2),
+            labelStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            labelStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            labelStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ])
     }
     
-    func configure(rover: String, camera: String, date: String) {
-        roverLabel.text = "Rover: \(rover)"
-        cameraLabel.text = "Camera: \(camera)"
-        dateLabel.text = "Date: \(date)"
+    func set(filter: SavedFilter) {
+        if let photoDate = filter.photoDate?.appPreviewString {
+            let roverName = filter.roverName ?? "All"
+            let cameraFullName = filter.cameraFullName ?? "All"
+            
+            roverLabel.set(title: "Rover: ", body: roverName)
+            cameraLabel.set(title: "Camera: ", body: cameraFullName)
+            dateLabel.set(title: "Date: ", body: photoDate)
+        }
     }
     
 }
